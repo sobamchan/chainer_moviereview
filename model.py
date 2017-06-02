@@ -1,5 +1,4 @@
 from sobamchan.sobamchan_chainer import Model
-from sobamchan.sobamchan_moviereview import train
 from sobamchan.sobamchan_chainer_link import PreTrainedEmbedId
 
 class MLP(Model):

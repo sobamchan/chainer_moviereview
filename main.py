@@ -8,9 +8,11 @@ from chainer import Variable
 import numpy as np
 from tqdm import tqdm
 
+from sobamchan.sobamchan_moviereview import train
+
 import argparse
 import os, sys
-sys.path.remove('/Users/sochan/project/sobamchan')
+# sys.path.remove('/Users/sochan/project/sobamchan')
 
 from model import MLP, CNN
 
