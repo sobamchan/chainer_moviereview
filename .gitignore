@@ -1,0 +1,6 @@
+!.gitkeep
+__pycache__
+*.png
+*.tar.gz
+aclImdb
+*.json
