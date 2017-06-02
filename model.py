@@ -1,3 +1,10 @@
+import chainer
+from chainer import datasets
+from chainer import optimizers
+import chainer.links as L
+import chainer.functions as F
+from chainer import Variable
+
 from sobamchan.sobamchan_chainer import Model
 from sobamchan.sobamchan_chainer_link import PreTrainedEmbedId
 
