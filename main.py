@@ -11,9 +11,9 @@ from tqdm import tqdm
 import argparse
 import os
 
-from sobamchan_chainer import Model
-from sobamchan_moviereview import train
-from sobamchan_chainer_link import PreTrainedEmbedId
+from sobamchan.sobamchan_chainer import Model
+from sobamchan.sobamchan_moviereview import train
+from sobamchan.sobamchan_chainer_link import PreTrainedEmbedId
 
 class MLP(Model):
     def __init__(self, class_n, vocab_n, d, vocab, fpath):
