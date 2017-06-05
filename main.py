@@ -8,7 +8,8 @@ from chainer import Variable
 import numpy as np
 from tqdm import tqdm
 
-from sobamchan.sobamchan_moviereview import train
+# from sobamchan.sobamchan_moviereview import train
+from train import train
 
 import argparse
 import os, sys
