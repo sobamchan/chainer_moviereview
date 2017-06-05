@@ -103,7 +103,7 @@ def train(opts):
         embed_tensor = embed_tensor.data
         if type(embed_tensor) is not np.ndarray:
             embed_tensor = chainer.cuda.to_cpu(embed_tensor)
-        np.save('./data/embeds/{}'.format(i), embed_tensor)
+        np.savetxt('./data/embeds/{}.csv'.format(i), embed_tensor, fmt="%0.5f", delimiter=",")
 
         order = np.random.permutation(test_n)
         test_x_iter = Iterator(test_x, bs, order)
