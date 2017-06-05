@@ -29,6 +29,7 @@ def get_args():
     parser.add_argument('--gpu', dest='gpu', default=-1, type=int)
     parser.add_argument('--output-dirname', dest='output_dirname', required=True)
     parser.add_argument('--w2v-path', dest='w2v_path', required=True)
+    parser.add_argument('--save-embed', dest='save_embed', type=int, default=-1)
 
     return parser.parse_args()
 
@@ -41,6 +42,7 @@ def train(opts):
     gpu = args.gpu
     output_dirname = args.output_dirname
     w2v_path = args.w2v_path
+    save_embed = args.save_embed
 
     print('loading dataset')
     mr = MovieReview('./data/')
@@ -98,12 +100,15 @@ def train(opts):
         print('train loss: {}'.format(loss_mean))
         del loss
 
-        print('output embed vector')
-        embed_tensor = model.embed_learn.W
-        embed_tensor = embed_tensor.data
-        if type(embed_tensor) is not np.ndarray:
-            embed_tensor = chainer.cuda.to_cpu(embed_tensor)
-        np.savetxt('./data/embeds/{}.csv'.format(i), embed_tensor, fmt="%0.5f", delimiter=",")
+        if save_embed == 1:
+            if i % 10 == 0:
+                print('output embed vector')
+                embed_tensor = model.embed_learn.W
+                embed_tensor = embed_tensor.data
+                if type(embed_tensor) is not np.ndarray:
+                    embed_tensor = chainer.cuda.to_cpu(embed_tensor)
+                # np.savetxt('./data/embeds/{}.csv'.format(i), embed_tensor, fmt="%0.5f", delimiter=",")
+                np.save('/home/takeshita/project/NLP/embeds/{}'.format(i), embed_tensor)
 
         order = np.random.permutation(test_n)
         test_x_iter = Iterator(test_x, bs, order)
