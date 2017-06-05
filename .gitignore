@@ -4,3 +4,5 @@ __pycache__
 *.tar.gz
 aclImdb
 *.json
+*.npy
+*.pkl

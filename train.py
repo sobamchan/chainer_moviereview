@@ -30,6 +30,7 @@ def get_args():
     parser.add_argument('--output-dirname', dest='output_dirname', required=True)
     parser.add_argument('--w2v-path', dest='w2v_path', required=True)
     parser.add_argument('--save-embed', dest='save_embed', type=int, default=-1)
+    parser.add_argument('--vocab-path', dest='vocab_path', type=str, default=False)
 
     return parser.parse_args()
 
@@ -43,6 +44,7 @@ def train(opts):
     output_dirname = args.output_dirname
     w2v_path = args.w2v_path
     save_embed = args.save_embed
+    vocab_path = args.vocab_path
 
     print('loading dataset')
     mr = MovieReview('./data/')
@@ -54,6 +56,10 @@ def train(opts):
     vocab = Vocabulary()
     for d in train_data + test_data:
         vocab.new(d)
+    if vocab_path is not False:
+        print('saving vocabulary')
+        vocab.save(vocab_path)
+    sys.exit()
 
     print('encoding')
     train_x = np.array([util.pad_to_max(vocab.encode(td), 150, 0) for td in train_data])
