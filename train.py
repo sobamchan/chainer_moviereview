@@ -59,7 +59,6 @@ def train(opts):
     if vocab_path is not False:
         print('saving vocabulary')
         vocab.save(vocab_path)
-    sys.exit()
 
     print('encoding')
     train_x = np.array([util.pad_to_max(vocab.encode(td), 150, 0) for td in train_data])
@@ -73,7 +72,7 @@ def train(opts):
     print('setting model up')
     class_n = 2
     vocab_n = len(vocab)
-    d = 300
+    d = 200
     fpath = w2v_path
     model = model(class_n, vocab_n, d, vocab, fpath)
     xp = model.check_gpu(gpu)
