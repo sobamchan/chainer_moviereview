@@ -20,5 +20,5 @@ from model import MLP, CNN
 if __name__ == '__main__':
     opts = {}
     opts['model'] = CNN
-    opts['optimizer'] = optimizers.AdaGrad(lr=.0001)
+    opts['optimizer'] = optimizers.AdaGrad()
     train(opts)
