@@ -76,7 +76,7 @@ def train(opts):
     test_acc_log = Log()
 
     print('starting training')
-    for _ in tqdm(range(epoch)):
+    for i in tqdm(range(epoch)):
 
         order = np.random.permutation(train_n)
         train_x_iter = Iterator(train_x, bs, order, shuffle=False)
@@ -98,8 +98,7 @@ def train(opts):
         print('train loss: {}'.format(loss_mean))
         del loss
         embed_tensor = model.embed_learn.W.data
-        print(embed_tensor.shape)
-        sys.exit()
+        np.save('./data/embeds/{}.npz'.format(i), embed_tensor)
 
         order = np.random.permutation(test_n)
         test_x_iter = Iterator(test_x, bs, order)
