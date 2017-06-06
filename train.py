@@ -97,8 +97,13 @@ def train(opts):
         train_loss_log.add(loss_mean)
         print('train loss: {}'.format(loss_mean))
         del loss
-        embed_tensor = model.embed_learn.W.data
-        np.save('./data/embeds/{}.npz'.format(i), embed_tensor)
+
+        print('output embed vector')
+        embed_tensor = model.embed_learn.W
+        embed_tensor = embed_tensor.data
+        if type(embed_tensor) is not np.ndarray:
+            embed_tensor = chainer.cuda.to_cpu(embed_tensor)
+        np.save('./data/embeds/{}'.format(i), embed_tensor)
 
         order = np.random.permutation(test_n)
         test_x_iter = Iterator(test_x, bs, order)
